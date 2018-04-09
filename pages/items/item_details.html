@@ -5,20 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Item</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="../../src/js/shared.js"></script>
+    <script src="../../src/js/item_details.js"></script>
 </head>
 <body>
-    <h1 id="h1_header">Add item</h1>
-    <input type="hidden" id="inp_id" name="id" /><br>
-    <label for="inp_title">Title</label><br>
-    <input type="text" id="inp_title" name="title" placeholder="Title" /><br>
-    <label for="inp_year">Year</label><br>
-    <input type="number" id="inp_year" name="year" placeholder="Year" /><br>
-    <label for="sel_category">Category</label><br>
-    <select id="sel_category"></select><br>
-    <label for="inp_info">Year</label><br>
-    <input type="url" id="inp_info" name="info" placeholder="URL detailed info" /><br><br>
-    <button id="btn_accept">Accept</button>
+    <h1 id="h1_header">Item details</h1>
+    <p id="message"></p>
+
+    <form id="formData" method="GET">
+        <input type="hidden" id="inp_action" name="action" />
+        <input type="hidden" id="inp_id" name="id" />
+
+        <label for="sel_category">Category</label><br>
+        <select id="sel_category" name="category" onchange="changed_category(this)"></select><br>
+
+        <label for="inp_title">Title</label><br>
+        <input type="text" id="inp_title" name="title" placeholder="Title" /><br>
+
+        <label for="inp_year">Year</label><br>
+        <input type="number" id="inp_year" name="year" placeholder="Year" /><br>
+
+        <label id="lab_mov_category" for="sel_mov_category">Movie category</label><br>
+        <select id="sel_mov_category" name="mov_category"></select><br>
+
+        <label for="inp_info">Info</label><br>
+        <input type="url" id="inp_info" name="info" placeholder="URL detailed info" /><br><br>
+        <button id="btn_accept">Accept</button>
+    </form>
 </body>
 </html>
