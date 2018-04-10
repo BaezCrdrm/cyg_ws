@@ -1,5 +1,12 @@
 <?php
 require_once '../model/models.php';
+
+function exQuery($_query)
+{
+    require_once '../ctrl/queries.php';
+    return executeQuery($_query);
+}
+
 function detailItem($id)
 {
     $query = "SELECT i.item_id, ic.cat_id, i.item_title, i.item_category, i.item_year, i.item_info FROM items i INNER JOIN item_category ic ON i.item_category = ic.cat_id WHERE i.item_id = $id GROUP BY 1,2,3,4,5,6;";
@@ -74,11 +81,5 @@ function deleteItem($id)
 {
     $query = "DELETE FROM items WHERE item_id = $id; ";
     $res = exQuery($query);
-}
-
-function exQuery($_query)
-{
-    require_once '../ctrl/queries.php';
-    return executeQuery($_query);
 }
 ?>

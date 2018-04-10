@@ -1,6 +1,4 @@
 <?php
-require_once "../model/models.php";
-
 function executeQuery($query)
 {
     require "connection.php";
