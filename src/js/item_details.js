@@ -1,6 +1,6 @@
 $("document").ready(function()
 {
-    document_Load('itid', '../../src/php/adm/items_sub.php');
+    document_Load('id', '../../src/php/adm/items_sub.php');
 });
 
 function getInfoFromServer()
@@ -10,7 +10,12 @@ function getInfoFromServer()
             type: "GET",
             data: {action:'consult', id:params["id"]},
             url: "../../src/php/adm/items_sub.php",
-            success: postToPage
+            success: function(data){
+                console.log(data);
+                data = JSON.parse(data);
+                
+                renderItemData(data);
+            }
         }
     );
 }
@@ -31,4 +36,15 @@ function changed_category(_select)
         $("#lab_mov_category").hide();
         $("#sel_mov_category").hide();
     }
+}
+
+function renderItemData(data)
+{
+    $("#inp_action").val('modify');
+    $("#inp_id").val(data.id);
+    $("#sel_category").val(data.itemCategory);
+    $("#inp_title").val(data.originalTitle);
+    $("#inp_year").val(data.year);
+    $("#sel_mov_category").val(data.movieCategory.id);
+    $("#inp_info").val(data.info);
 }

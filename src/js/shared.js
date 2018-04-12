@@ -32,7 +32,7 @@ function document_Load(_id, _script)
     modify = false;
     if(params[_id] != 'null' && params[_id] != '' && params[_id] != undefined)
     {
-        $("#inpId").val(params[_id]);
+        $("#inp_id").val(params[_id]);
         getInfoFromServer();
         modify = true;
     }
@@ -43,7 +43,6 @@ function document_Load(_id, _script)
     $("#message").text("");
     $("#btn_accept").click(function() 
     {
-        // Presenta un problema al agregar el script
         btnAccept_Click(_script);
     });
 }
@@ -100,8 +99,9 @@ function btnAccept_Click(_script)
                 if(modify == false)
                     window.location.replace("../");
             },
-            error: function()
+            error: function(error)
             {
+                console.log(error);
                 alert(errorMsg);
             }
         }

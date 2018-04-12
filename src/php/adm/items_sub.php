@@ -11,7 +11,7 @@ if(isset($_REQUEST['action']))
     $id = null;
 }
 
-if($action != 'delete')
+if($action == 'new' || $action == "modify")
 {
     require_once '../model/models.php';
     $cat = $_REQUEST['category'];
@@ -36,12 +36,14 @@ if($action != 'delete')
     }
 }
 
-if(isset($item))
+if(isset($item)
+    || (isset($id) && ($action == "consult" || $action == "delete")))
 {
     require 'items_fun.php';
     switch ($action) {
         case 'consult':
             $item = detailItem($id);
+            echo json_encode($item);
             break;
 
         case 'new':

@@ -9,20 +9,25 @@ function exQuery($_query)
 
 function detailItem($id)
 {
-    $query = "SELECT i.item_id, ic.cat_id, i.item_title, i.item_category, i.item_year, i.item_info FROM items i INNER JOIN item_category ic ON i.item_category = ic.cat_id WHERE i.item_id = $id GROUP BY 1,2,3,4,5,6;";
+    // General item data
+    $query = "SELECT i.item_id, ic.cat_id, i.item_title, i.item_category, i.item_year, i.item_info 
+    FROM items i INNER JOIN item_category ic ON i.item_category = ic.cat_id 
+    WHERE i.item_id = $id GROUP BY 1,2,3,4,5,6;";
 
     $consult = exQuery($query);
     while($row = mysqli_fetch_row($consult))
     {
         switch ($row[1]) {
             case 1:
+                // For movie items
                 $query = "SELECT m.mov_cat FROM movies m WHERE m.mov_id = $row[0]";
                 $consult_t = exQuery($query);
-                while ($row_r <= mysqli_fetch_row($consult_t)) {
+                // ??
+                while ($row_r = mysqli_fetch_row($consult_t)) {
                     $mov_cat = $row_r[0];
                 }
 
-                $item = new Movie($row[0], $row[2], $mov_cat,$row[4], $row[5]);
+                $item = new Movie($row[0], $row[2], $mov_cat, $row[4], $row[5]);
                 break;
         }
     }
@@ -58,22 +63,29 @@ function addNewItem($item)
 function editItem($id, $item)
 {
     $flag_ok = true;
-    $query = "UPDATE items SET item_title = '$item->originalTitle', item_category = $item->itemCategory, item_year = $item->year, item_info = '$item->info' WHERE item_id = $item->id; ";
+    $query = "UPDATE items 
+    SET item_title = '$item->originalTitle', item_category = $item->itemCategory, item_year = $item->year, item_info = '$item->info' 
+    WHERE item_id = $item->id; ";
+    $res = exQuery($query);
 
-    switch ($item->itemCategory) {
-        case 1:
-            $query = "UPDATE movies SET mov_cat = $item->movieCategory WHERE item_id = $item->id; ";
-            break;
-
-        default:
-            echo ('Error: "addNewItem"');
-            $flag_ok = false;
-            break;
-    }
-
-    if($flag_ok == true)
+    if($res == true)
     {
-        $res = exQuery($query);
+        switch ($item->itemCategory) {
+            case 1:
+                $_id = $item->movieCategory->id;
+                $query = "UPDATE movies SET mov_cat = $_id WHERE item_id = $item->id; ";
+                break;
+
+            default:
+                echo ('Error: "addNewItem"');
+                $flag_ok = false;
+                break;
+        }
+
+        if($flag_ok == true)
+        {
+            $res = exQuery($query);
+        }
     }
 }
 
