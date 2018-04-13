@@ -1,6 +1,7 @@
 $("document").ready(function()
 {
     document_Load('id', '../../src/php/adm/items_sub.php');
+    changed_category({value:1});
 });
 
 function getInfoFromServer()
@@ -28,14 +29,20 @@ function loadPageData()
 
 function changed_category(_select)
 {
-    if(_select.value == 1)
+    hide_all_items_divs();
+    if(_select.value == 1 || _select.value == 2)
     {
-        $("#lab_mov_category").show();
-        $("#sel_mov_category").show();
-    } else {
-        $("#lab_mov_category").hide();
-        $("#sel_mov_category").hide();
+        $("#div_movie_item").show();
+    } else if(_select.value == 3)
+    {
+        $("#div_song_item").show();
     }
+}
+
+function hide_all_items_divs()
+{
+    $("#div_movie_item").hide();
+    $("#div_song_item").hide();
 }
 
 function renderItemData(data)

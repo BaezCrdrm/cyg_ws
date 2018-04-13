@@ -15,23 +15,56 @@
     <p id="message"></p>
 
     <form id="formData" method="GET">
-        <input type="hidden" id="inp_action" name="action" />
-        <input type="hidden" id="inp_id" name="id" />
+        <!-- Item basic info -->
+        <div>
+            <input type="hidden" id="inp_action" name="action" />
+            <input type="hidden" id="inp_id" name="id" />
 
-        <label for="sel_category">Category</label><br>
-        <select id="sel_category" name="category" onchange="changed_category(this)"></select><br>
+            <h2>Item info</h2>
+            <label for="sel_category">Category</label><br>
+            <select id="sel_category" name="category" onchange="changed_category(this)"></select><br>
 
-        <label for="inp_title">Title</label><br>
-        <input type="text" id="inp_title" name="title" placeholder="Title" /><br>
+            <label for="inp_title">Title</label><br>
+            <input type="text" id="inp_title" name="title" placeholder="Title" required /><br>
 
-        <label for="inp_year">Year</label><br>
-        <input type="number" id="inp_year" name="year" placeholder="Year" /><br>
+            <label for="inp_year">Year</label><br>
+            <input type="number" id="inp_year" name="year" placeholder="Year" value="2000" /><br>
 
-        <label id="lab_mov_category" for="sel_mov_category">Movie category</label><br>
-        <select id="sel_mov_category" name="mov_category"></select><br>
+            <label for="inp_info">Info</label><br>
+            <input type="url" id="inp_info" name="info" placeholder="URL detailed info" /><br><br>
+        </div>
+        
+        <!-- Movie / TV Show Item -->
+        <div id="div_movie_item">
+            <h2>Movie / TV Show Item info</h2>
+            <label id="lab_mov_category" for="sel_mov_category">Movie/TV Show category</label><br>
+            <select id="sel_mov_category" name="mov_category"></select><br>
 
-        <label for="inp_info">Info</label><br>
-        <input type="url" id="inp_info" name="info" placeholder="URL detailed info" /><br><br>
+            <div id="multilanguage_titles"></div>
+        </div>
+
+        <!-- Songs Item -->
+        <div id="div_song_item">
+            <h2>Songs Item info</h2>
+            <label id="lab_song_artist" for="inp_song_artist">Song artist/Group</label><br>
+            <input type="text" id="inp_song_artist" name="song_artist" placeholder="Artist/Group" /><br>
+            <label id="lab_song_album" for="inp_song_album">Album</label><br>
+            <input type="text" id="inp_song_album" name="song_album" placeholder="Album" /><br>
+        </div>
+
+        <!-- Other Item -->
+        <!-- Multilanguage items must be improved before implementing this category -->
+        <!-- <div>
+            <label for="inp_desc">Type / Description</label><br>
+            <input type="text" id="inp_desc" name="inp_description" placeholder="Type/Description" /><br>
+            <label id="lab_other_gender" for="sel_other_gender">Gender</label><br>
+            <select id="sel_other_gender" name="other_gender">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="none">None</option>
+            </select><br>
+        </div> -->
+
         <button id="btn_accept">Accept</button>
     </form>
 </body>
