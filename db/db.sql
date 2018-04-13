@@ -210,6 +210,8 @@ COMMIT;
 START TRANSACTION;
 USE `cyg`;
 INSERT INTO `cyg`.`item_category` (`cat_id`, `cat_name`) VALUES (1, 'Movies');
+INSERT INTO `cyg`.`item_category` (`cat_id`, `cat_name`) VALUES (2, 'TV Shows');
+INSERT INTO `cyg`.`item_category` (`cat_id`, `cat_name`) VALUES (3, 'Songs');
 
 COMMIT;
 
