@@ -21,12 +21,37 @@ if($action == 'new' || $action == "modify")
 
     switch ($cat) {
         case 1:
+            $mov_cat = $_REQUEST['mov_category'];
             $item = new Movie(
                 $id,
                 $title,
-                $cat,
+                $mov_cat,
                 $year,
                 $info
+            );
+            break;
+
+        case 2:
+            $tvs_cat = $_REQUEST['mov_category'];
+            $item = new TVShow(
+                $id,
+                $title,
+                $tvs_cat,
+                $year,
+                $info
+            );
+            break;
+
+        case 3:
+            $artist = $_REQUEST['song_artist'];
+            $album = $_REQUEST['song_album'];
+            $item = new Song(
+                $id,
+                $title,
+                $year,
+                $info,
+                $artist,
+                $album
             );
             break;
         

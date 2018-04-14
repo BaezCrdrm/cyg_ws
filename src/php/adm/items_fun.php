@@ -41,16 +41,32 @@ function detailItem($id)
  */
 function addNewItem($item)
 {
-    // Query para todos los items
-    $query = "INSERT INTO items (item_title, item_category, item_year, item_info) VALUES ('$item->originalTitle', $item->itemCategory, $item->year, '$item->info'); ";
+    // All items
+    $query = "INSERT INTO items (item_title, item_category, item_year, item_info)
+    VALUES ('$item->originalTitle', $item->itemCategory, $item->year, '$item->info'); ";
 
     switch ($item->itemCategory) {
         case 1:
-            // Query para peículas
+            // Movies
             require_once '../ctrl/queries.php';
             $item->id = executeQueryReturnId($query);
-            $cat = $item->movieCategory->id;
-            $query = "INSERT INTO movies (mov_id, mov_cat) VALUES ($item->id, $cat); ";
+            $query = "INSERT INTO movies (mov_id, mov_cat) VALUES ($item->id, $item->movieCategory); ";
+            $res = exQuery($query);
+            break;
+
+        case 2:
+            // TV shows
+            require_once '../ctrl/queries.php';            
+            $item->id = executeQueryReturnId($query);
+            $query = "INSERT INTO tvshows (ts_id, ts_cat) VALUES ($item->id, $item->showCategory); ";
+            $res = exQuery($query);
+            break;
+
+        case 3:
+            // Songs
+            require_once '../ctrl/queries.php';
+            $item->id = executeQueryReturnId($query);
+            $query = "INSERT INTO songs (song_id, song_artist, song_album) VALUES ($item->id, '$item->artist', '$item->album'); ";
             $res = exQuery($query);
             break;
 
